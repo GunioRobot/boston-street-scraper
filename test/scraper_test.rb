@@ -17,7 +17,6 @@ class TokenTest < Test::Unit::TestCase
       :body => File.open('test/fixtures/newbury.html').read
     scraper = Scraper.new('newbury')
     assert_equal File.open('test/fixtures/newbury.html').read, scraper.response
-    assert_equal File.open('test/fixtures/newbury_table.html').read.strip, scraper.response_table.strip
     
      expected = [
       {:section=>"Brookline Ave - Kenmore St",

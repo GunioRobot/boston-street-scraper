@@ -4,11 +4,8 @@ class Scraper
   format :html
   def initialize(street_name)
     @response = HTTParty.get "http://www.cityofboston.gov/publicworks/sweeping/?streetname=#{street_name.bytes.collect { |a| a.chr.capitalize}.join}&Neighborhood="
-    @response_table = Nokogiri::HTML(@response).css('#tblsweeping').to_s
     @attributes = Nokogiri::HTML(@response).css('#tblsweeping tr').collect do |item|
       parsed = item.css('td').collect {|i|i.children.to_s.gsub("\302", ' ').gsub("\240", " ").gsub(/\s\s+/, ' ').strip}
-      
-      parsed
       {:street => parsed[0], :district => parsed[1], :side => parsed[2], :section => Scraper.parse_section(parsed[3] || ''), :schedule => Scraper.parse_schedule(parsed[4] || '')}
     end
     @attributes.reject! {|i| i[:street].blank?}

@@ -1,1 +1,12 @@
-Provide a Gem to scrape http://www.cityofboston.gov/publicworks/sweeping/?streetname=NEWBURY&Neighborhood= into usable format.
+=Boston-Street-Scraper
+
+A screen scraper for the cityofboston.gov/publicworks/sweeping pages
+
+Makes get requests to urls formed like:
+http://www.cityofboston.gov/publicworks/sweeping/?streetname=#{STREET_NAME}&Neighborhood=
+
+Parsed the response into an array of hashes
+
+>> Scraper.new('brighton').attributes.inspect
+=> "[{:section=>\"Commonwealth Ave - Cambridge St\", :street=>\"Brighton Ave\", :district=>\"Allston-Brighton\", :side=>\"Median\", :schedule=>[\"Every Fri\", \"12:01am - 7am\", \"Mar 4\"]}, {:section=>\"Cambridge St - Commonwealth Ave\", :street=>\"Brighton Ave\", :district=>\"Allston-Brighton\", :side=>\"\", :schedule=>[\"Every Fri\", \"12:01am - 7am\", \"Mar 4\"]}, {:section=>\"Cambridge St - Commonwealth Ave\", :street=>\"Brighton Ave\", :district=>\"Allston-Brighton\", :side=>\"Median\", :schedule=>[\"Every Tue\", \"12:01am - 7am\", \"Mar 1\"]}, {:section=>\"Commonwealth Ave - Cambridge St\", :street=>\"Brighton Ave\", :district=>\"Allston-Brighton\", :side=>\"\", :schedule=>[\"Every Tue\", \"12:01am - 7am\", \"Mar 1\"]}, {:section=>\"Cambridge - Caldwell\", :street=>\"Brighton St\", :district=>\"Charlestown\", :side=>\"Even\", :schedule=>[\"2nd 4th Tue\", \"8am - 12pm\", \"Apr 12\"]}, {:section=>\"Cambridge - Caldwell\", :street=>\"Brighton St\", :district=>\"Charlestown\", :side=>\"Odd\", :schedule=>[\"1st 3rd Tue\", \"8am - 12pm\", \"Apr 5\"]}]"
+
