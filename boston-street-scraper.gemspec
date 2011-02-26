@@ -15,4 +15,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'activeresource',  '>= 3.0.0'
   s.add_dependency 'actionpack',      '>= 3.0.0'
   s.add_dependency 'httparty'
+  s.add_dependency 'nokogiri'
 end
