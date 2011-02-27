@@ -4,18 +4,18 @@ require 'fakeweb'
 class TokenTest < Test::Unit::TestCase
   
   def test_parse_section
-    assert_equal 'Brookline Ave - Kenmore St', Scraper.parse_section("Brookline Ave - Kenmore St [<a target=\"_blank\" href=\"http://maps.google.com/maps?q=Newbury+St+and+Brookline+Ave,+boston+ma\">Map</a>]")
+    assert_equal 'Brookline Ave - Kenmore St', BostonStreetScraper::Scraper.parse_section("Brookline Ave - Kenmore St [<a target=\"_blank\" href=\"http://maps.google.com/maps?q=Newbury+St+and+Brookline+Ave,+boston+ma\">Map</a>]")
   end
   
   def test_parse_schedule
-    assert_equal ['2nd 4th Wed', '12:01am - 7am', 'Apr 13'], Scraper.parse_schedule("2nd 4th Wed <br>12:01am - 7am<br>(Apr 13)")
+    assert_equal ['2nd 4th Wed', '12:01am - 7am', 'Apr 13'], BostonStreetScraper::Scraper.parse_schedule("2nd 4th Wed <br>12:01am - 7am<br>(Apr 13)")
   end
 
   def test_initialize
     # FakeWeb mock: http://www.cityofboston.gov/publicworks/sweeping/?streetname=NEWBURY&Neighborhood=
     FakeWeb.register_uri :get, "http://www.cityofboston.gov/publicworks/sweeping/?streetname=NEWBURY&Neighborhood=",
       :body => File.open('test/fixtures/newbury.html').read
-    scraper = Scraper.new('newbury')
+    scraper = BostonStreetScraper::Scraper.new('newbury')
     assert_equal File.open('test/fixtures/newbury.html').read, scraper.response
     
      expected = [
